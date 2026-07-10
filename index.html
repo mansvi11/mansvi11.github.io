@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mansvi Shukla — Data Analyst &amp; ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f4ee;
+    --paper-dim: #efece3;
+    --ink: #142a3d;
+    --ink-soft: #3c5164;
+    --teal: #2f6f63;
+    --amber: #c98a3e;
+    --line: #d8d3c4;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(246,244,238,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+  nav .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+  }
+  nav .links {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+  }
+  nav .links a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 11.5px;
+    transition: color 0.2s;
+  }
+  nav .links a:hover { color: var(--teal); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 96px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero .eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--teal);
+    display: inline-block;
+  }
+  h1.name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.02;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  h1.name em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--teal);
+  }
+  .hero p.lede {
+    max-width: 560px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+  }
+  .hero .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    border: 1px solid var(--ink);
+    transition: all 0.2s ease;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.primary:hover { background: var(--teal); border-color: var(--teal); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+
+  /* node graph decoration */
+  .node-deco {
+    position: absolute;
+    right: -40px;
+    top: 40px;
+    width: 340px;
+    height: 340px;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  @media (max-width: 760px) { .node-deco { display: none; } }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .section-head .idx {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
+    font-size: 13px;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-grid p { color: var(--ink-soft); font-size: 15.5px; margin: 0 0 14px; }
+  .skill-block { margin-bottom: 16px; }
+  .skill-block .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 12.5px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper-dim);
+    color: var(--ink-soft);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .job { position: relative; padding-left: 28px; margin-bottom: 40px; }
+  .job:last-child { margin-bottom: 0; }
+  .job::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+  .job::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 16px; bottom: -34px;
+    width: 1px;
+    background: var(--line);
+  }
+  .job:last-child::after { display: none; }
+  .job-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .job-title { font-weight: 600; font-size: 16px; }
+  .job-org { color: var(--teal); font-weight: 500; }
+  .job-dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .job ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 14.5px; }
+  .job li { margin-bottom: 6px; }
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 700px) { .project-grid { grid-template-columns: 1fr; } }
+  .project-card {
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+    padding: 26px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card .pidx {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .project-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    margin: 0 0 6px;
+  }
+  .project-card .stack {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .project-card ul {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    padding-left: 16px;
+    margin: 0 0 16px;
+    flex-grow: 1;
+  }
+  .project-card li { margin-bottom: 5px; }
+  .project-card .plink {
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    align-self: flex-start;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+  .project-card .plink:hover { color: var(--teal); border-color: var(--teal); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-item .school { font-weight: 600; font-size: 15px; }
+  .edu-item .degree { color: var(--ink-soft); font-size: 13.5px; margin-top: 2px; }
+  .edu-item .dates { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer {
+    padding: 72px 0 56px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  footer h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    margin: 0 0 14px;
+  }
+  footer p { color: var(--ink-soft); margin: 0 0 28px; font-size: 15px; }
+  footer .contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  footer .foot-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Mansvi Shukla</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="node-deco" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#142a3d" stroke-opacity="0.18" stroke-width="1.2" fill="none">
+      <line x1="60" y1="60" x2="180" y2="40"/>
+      <line x1="180" y1="40" x2="280" y2="90"/>
+      <line x1="60" y1="60" x2="90" y2="170"/>
+      <line x1="180" y1="40" x2="150" y2="160"/>
+      <line x1="280" y1="90" x2="230" y2="200"/>
+      <line x1="90" y1="170" x2="150" y2="160"/>
+      <line x1="150" y1="160" x2="230" y2="200"/>
+      <line x1="90" y1="170" x2="120" y2="280"/>
+      <line x1="230" y1="200" x2="200" y2="290"/>
+      <line x1="120" y1="280" x2="200" y2="290"/>
+    </g>
+    <g fill="#c98a3e">
+      <circle cx="60" cy="60" r="4.5"/>
+      <circle cx="180" cy="40" r="4.5"/>
+      <circle cx="280" cy="90" r="4.5"/>
+    </g>
+    <g fill="#2f6f63">
+      <circle cx="90" cy="170" r="4.5"/>
+      <circle cx="150" cy="160" r="4.5"/>
+      <circle cx="230" cy="200" r="4.5"/>
+    </g>
+    <g fill="#142a3d">
+      <circle cx="120" cy="280" r="4.5"/>
+      <circle cx="200" cy="290" r="4.5"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="eyebrow">Data Analyst &amp; ML Engineer</div>
+    <h1 class="name">Turning raw data<br>into <em>clear decisions</em>.</h1>
+    <p class="lede">B.Tech student in Electronics &amp; Communication Engineering with a minor in Data Science &amp; Machine Learning. I build dashboards, models, and full-stack tools that make data easier to act on.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="mailto:mansvishukla2006@gmail.com">Get in touch</a>
+      <a class="btn ghost" href="https://github.com/mansvi11" target="_blank" rel="noopener">View GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Data Analyst and aspiring Machine Learning practitioner, currently pursuing my B.Tech at Jaypee Institute of Information Technology alongside a Data Science &amp; ML minor from IIT Guwahati.</p>
+        <p>My experience spans building interactive dashboards at Tata Consultancy Services, developing a real-time full-stack platform at EY GDS, and shipping personal projects that apply data structures and algorithms to real-world problems. I like taking messy data and turning it into something a business can actually use.</p>
+      </div>
+      <div>
+        <div class="skill-block">
+          <span class="label">Languages</span>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">JavaScript</span><span class="chip">SQL</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <span class="label">Data &amp; ML</span>
+          <div class="chips">
+            <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Scikit-Learn</span><span class="chip">Statistical Modeling</span><span class="chip">Data Visualization</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <span class="label">Tools &amp; Databases</span>
+          <div class="chips">
+            <span class="chip">Tableau</span><span class="chip">Power BI</span><span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">Git</span><span class="chip">JMeter</span><span class="chip">Postman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">02</span><h2>Experience</h2></div>
+
+    <div class="job">
+      <div class="job-top">
+        <div><span class="job-title">Full Stack Web Developer Intern</span> — <span class="job-org">EY GDS Next Gen</span></div>
+        <div class="job-dates">Feb 2025 – Mar 2025</div>
+      </div>
+      <ul>
+        <li>Developed a scalable full-stack auction platform using React.js, Node.js, and Express.js, handling 5,000+ product listings, improving user satisfaction by 25%.</li>
+        <li>Implemented a WebSocket-based real-time bidding system, reducing latency by 30% under 500 concurrent users.</li>
+        <li>Built secure REST APIs for authentication, bidding, and transactions, improving system performance by 18%.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-top">
+        <div><span class="job-title">Data Analyst Intern</span> — <span class="job-org">Tata Consultancy Services</span></div>
+        <div class="job-dates">Dec 2023 – Jan 2024</div>
+      </div>
+      <ul>
+        <li>Developed 15+ interactive dashboards using Tableau and Power BI for business insights and decision-making.</li>
+        <li>Automated data processing workflows using Python, saving 8+ hours per week.</li>
+        <li>Analyzed and cleaned large-scale datasets, improving reporting accuracy by 20%.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">03</span><h2>Projects</h2></div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="pidx">// 001</div>
+        <h3>Splitmate</h3>
+        <div class="stack">C++ · Graph Algorithms · Express.js · MongoDB</div>
+        <ul>
+          <li>Built a scalable CLI expense-splitting app handling 100+ users and 500+ transactions.</li>
+          <li>Implemented graph algorithms and hash maps to cut total settlements by 60%.</li>
+          <li>Developed RESTful APIs for real-time, group-wise expense tracking.</li>
+        </ul>
+        <a class="plink" href="https://github.com/mansvi11" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+      <div class="project-card">
+        <div class="pidx">// 002</div>
+        <h3>AI Interview Prep Assistant</h3>
+        <div class="stack">React · OpenAI API · Tailwind CSS</div>
+        <ul>
+          <li>Built an AI-powered assistant generating contextual problem-solving guidance.</li>
+          <li>Integrated the OpenAI API for real-time responses with 85–90% accuracy.</li>
+          <li>Designed an interactive interface with topic filtering and progress tracking.</li>
+        </ul>
+        <a class="plink" href="https://github.com/mansvi11" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">04</span><h2>Education</h2></div>
+    <div class="edu-item">
+      <div>
+        <div class="school">Jaypee Institute of Information Technology</div>
+        <div class="degree">B.Tech, Electronics &amp; Communication Engineering — Noida, U.P.</div>
+      </div>
+      <div class="dates">Aug 2023 – May 2027</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <div class="school">Indian Institute of Technology, Guwahati</div>
+        <div class="degree">Minor in Data Science &amp; Machine Learning — Remote</div>
+      </div>
+      <div class="dates">Jan 2025 – May 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's work together.</h2>
+    <p>Open to Data Analyst, Machine Learning, and full-stack opportunities.</p>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:mansvishukla2006@gmail.com">mansvishukla2006@gmail.com</a>
+      <a class="btn ghost" href="https://linkedin.com/in/mansvi-shukla" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/mansvi11" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-note">+91-7827442541</div>
+  </div>
+</footer>
+
+</body>
+</html>
